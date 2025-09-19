@@ -11,9 +11,9 @@ app.use(cors());
 app.use(express.json());
 app.use(logger);
 
-// Helper: generate shortcode if not provided
+//generate shortcode -> if not provided
 function generateShortCode() {
-  return uuidv4().slice(0, 6); // 6-char unique ID
+  return uuidv4().slice(0, 6);
 }
 
 // Create short URL
@@ -23,7 +23,7 @@ app.post("/shorturls", (req, res) => {
     return res.status(400).json({ message: "URL is required" });
   }
 
-  // validate shortcode uniqueness
+  // validate shortcode
   let code = shortcode || generateShortCode();
   if (urls.has(code)) {
     return res.status(400).json({ message: "Shortcode already exists" });
@@ -45,7 +45,7 @@ app.post("/shorturls", (req, res) => {
   });
 });
 
-// Redirect to original URL
+// to -> original url
 app.get("/:code", (req, res) => {
   const code = req.params.code;
   const data = urls.get(code);
@@ -69,7 +69,7 @@ app.get("/:code", (req, res) => {
   return res.redirect(data.originalUrl);
 });
 
-// Get stats
+// get stats
 app.get("/shorturls/:code", (req, res) => {
   const code = req.params.code;
   const data = urls.get(code);
