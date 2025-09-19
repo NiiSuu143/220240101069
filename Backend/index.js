@@ -16,7 +16,7 @@ function generateShortCode() {
   return uuidv4().slice(0, 6);
 }
 
-// Create short URL
+// create short url
 app.post("/shorturls", (req, res) => {
   const { url, validity, shortcode } = req.body;
   if (!url) {
